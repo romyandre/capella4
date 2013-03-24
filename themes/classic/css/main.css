@@ -4,14 +4,29 @@ body {
     font-size: 11px;
 	margin:0;
 	width:1024px;
-	height:768px;
+	height:600px;
 }
 #desktop
 {
 	margin:0;
 	width:1024px;
-	height:768px;
+	height:600px;
 	background: no-repeat url("../images/wallpaper.jpg");
+}
+#icon
+{
+	margin-bottom:20px;
+	width:64px;
+	text-align:center;
+	color:white;
+}
+#icon .iconname
+{
+
+}
+#clock
+{
+  float: right;
 }
 .dock {
 	position: relative; 

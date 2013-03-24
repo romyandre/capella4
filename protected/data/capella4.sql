@@ -11,7 +11,7 @@ START TRANSACTION;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `pExecuteImmediate`$$
-CREATE DEFINER=`capella4`@`localhost` PROCEDURE `pExecuteImmediate`(IN tSQLStmt TEXT)
+CREATE  PROCEDURE `pExecuteImmediate`(IN tSQLStmt TEXT)
 BEGIN
   SET @executeImmediateSQL = tSQLStmt;
   PREPARE executeImmediateSTML FROM @executeImmediateSQL;
@@ -20,13 +20,13 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `pRaiseError`$$
-CREATE DEFINER=`capella4`@`localhost` PROCEDURE `pRaiseError`(sError VARCHAR(255))
+CREATE  PROCEDURE `pRaiseError`(sError VARCHAR(255))
 BEGIN
         CALL pExecuteImmediate(fFormat('CALL `error: %s', sError));
 END$$
 
 DROP FUNCTION IF EXISTS `GetParamValue`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetParamValue`(vParamName text) RETURNS text CHARSET utf8
+CREATE  FUNCTION `GetParamValue`(vParamName text) RETURNS text CHARSET utf8
 BEGIN
 	declare ret text;
 	select paramvalue
@@ -37,7 +37,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetRunNo`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetRunNo`(vsnroid int,vdate datetime) RETURNS varchar(100) CHARSET utf8
+CREATE  FUNCTION `GetRunNo`(vsnroid int,vdate datetime) RETURNS varchar(100) CHARSET utf8
 BEGIN
 	declare vformatdoc,vformatno,vmr,vrepeatby,vrom varchar(100);
 	declare vdd,vmm,vyy,vcurrvalue,lyy,vtrap integer;
@@ -223,7 +223,7 @@ set vtrap = 2;
 END$$
 
 DROP FUNCTION IF EXISTS `GetRunNoSp`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetRunNoSp`(vsnroid int,
+CREATE  FUNCTION `GetRunNoSp`(vsnroid int,
 vdate datetime,vCC varchar(5), vPT varchar(5), vPP varchar(5) ) RETURNS varchar(100) CHARSET utf8
 BEGIN
 	declare vformatdoc,vformatno,vmr,vrepeatby,vrom varchar(100);
@@ -518,7 +518,7 @@ end if;
 END$$
 
 DROP FUNCTION IF EXISTS `GetWfBefStat`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWfBefStat`(vwfname varchar(50), 
+CREATE  FUNCTION `GetWfBefStat`(vwfname varchar(50), 
 vcreatedby varchar(50)) RETURNS int(11)
 BEGIN
 	declare vreturn int;
@@ -533,7 +533,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetWfBefStatByCreated`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWfBefStatByCreated`(vwfname varchar(50),
+CREATE  FUNCTION `GetWfBefStatByCreated`(vwfname varchar(50),
 vbefstat tinyint,
 vcreatedby varchar(50)) RETURNS int(11)
 BEGIN
@@ -561,7 +561,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetWFCompareMax`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWFCompareMax`(vwfname varchar(50),
+CREATE  FUNCTION `GetWFCompareMax`(vwfname varchar(50),
 vnextstat int,
 vcreatedby varchar(50)) RETURNS int(11)
 BEGIN
@@ -584,7 +584,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetWFCompareMinApp`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWFCompareMinApp`(vwfname varchar(50),
+CREATE  FUNCTION `GetWFCompareMinApp`(vwfname varchar(50),
 vnextstat int,
 vcreatedby varchar(50)) RETURNS int(11)
 BEGIN
@@ -608,7 +608,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetWfMaxStatByWfName`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWfMaxStatByWfName`(vwfname varchar(50)) RETURNS int(11)
+CREATE  FUNCTION `GetWfMaxStatByWfName`(vwfname varchar(50)) RETURNS int(11)
 BEGIN
 	declare vreturn int;
 
@@ -628,7 +628,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetWfMinStatByWfName`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWfMinStatByWfName`(vwfname varchar(50),vcreatedby integer) RETURNS int(11)
+CREATE  FUNCTION `GetWfMinStatByWfName`(vwfname varchar(50),vcreatedby integer) RETURNS int(11)
 BEGIN
 	declare vreturn int;
 	select c.wfminstat
@@ -642,7 +642,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetWfNextStatByCreated`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWfNextStatByCreated`(vwfname varchar(50), 
+CREATE  FUNCTION `GetWfNextStatByCreated`(vwfname varchar(50), 
 vbefstat tinyint,
 vcreatedby varchar(50)) RETURNS int(11)
 BEGIN
@@ -658,7 +658,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `GetWFRecStatByCreated`$$
-CREATE DEFINER=`capella4`@`localhost` FUNCTION `GetWFRecStatByCreated`(vwfname varchar(50),
+CREATE  FUNCTION `GetWFRecStatByCreated`(vwfname varchar(50),
 vbefstat tinyint,
 vcreatedby varchar(50)) RETURNS int(11)
 BEGIN

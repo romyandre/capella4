@@ -10,6 +10,7 @@
 
 <body>
 <div id='cssmenu'>
+<span class="float_right" id="clock"></span>
 <ul>
 	<li class='has-sub'><a href='#'><span>Application</span></a>
       <ul>
@@ -55,24 +56,26 @@ $menus = Groupmenu::model()->findallbysql('select a.*
 
 	foreach ($menus as $menu)
 	{
+	echo '<div id="icon">';
 	$this->beginWidget('zii.widgets.jui.CJuiDraggable',array(
     'options'=>array(
-		'containment'=>[0,50,800,600]
+		'containment'=>array(0,50,800,600)
     ),
 ));
-    echo "<a href='index.php?r=".$menu->menuaccess->menuurl."'><img src='".Yii::app()->request->baseUrl."/images/".$menu->menuaccess->iconfile."'></img></a>";
+    echo "<a href='#'><img src='".Yii::app()->request->baseUrl."/images/".$menu->menuaccess->iconfile."'></img></a>";
+	echo '<div class="iconname">';
+	echo $menu->menuaccess->description;
+	echo '</div>';
 	$this->endWidget();
+	echo "</div>";
 	}
 ?>
 </div>
-<script>
-$("#cssmenu").bind("contextmenu", function(e) {
-    return false;
-});
-$("#desktop").bind("contextmenu", function(e) {
-    return false;
-});
-</script>
+<div class="abs" id="bar_bottom">
+    <a class="float_left" href="#" id="show_desktop" title="Show Desktop">
+      <img src="<?php echo Yii::app()->theme->baseurl?>/desktop.png" />
+    </a>
+</div>
 
 
 </body>
