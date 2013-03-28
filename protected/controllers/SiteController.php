@@ -31,13 +31,31 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
         if (Yii::app()->user->id != '')
         {
-          $this->layout='//layouts/column1';
-          $this->render('index');
+			$this->layout='//layouts/column1';
+			$this->render('index');
         }
         else
         {	
           $this->actionLogin();
         }
+	}
+	
+	public function actionLoadmodule()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+if (Yii::app()->request->isAjaxRequest)
+      {
+		$menuaccess = Menuaccess::model()->findbypk($_POST['id']);
+
+          echo CJSON::encode(array(
+              'status'=>'success',
+			  'moduleid'=>$menuaccess->menuaccessid,
+			  'modulename'=>$menuaccess->description,
+			  'div'=>$this->renderpartial('index'.$menuaccess->menuname,false,true)
+              ));
+          Yii::app()->end();
+      }
 	}
 
 	/**
@@ -76,7 +94,14 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login()) {
 			  $useraccess = Useraccess::model()->findbyattributes(array('username'=>Yii::app()->user->id));
-			  $useraccess->save();
+			  if ($useraccess !== null)
+			  {
+				Yii::app()->theme = $useraccess->theme;
+			  }
+			  else
+			  {
+				Yii::app()->theme = 'classic';
+			  }
 			  $this->redirect(Yii::app()->user->returnUrl);
 			} 
 		}
