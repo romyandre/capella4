@@ -1,4 +1,4 @@
-Capella ERP Indonesia v3.1.0
+Capella ERP Indonesia v4.0
 Alhamdulillah, segala puja dan puji syukur kami panjatkan kepada Allah SWT, yang telah memberikan rahmat dan karunia tak terhingga dari pintu yang tidak pernah kami duga. Dengan segala kerendahan hati, Prisma Data Abadi meluncurkan software Capella ERP Indonesia v3.1.0 pengembangan dari produk Capella ERP Indonesia v2.8. Peluncuran ini ditandai dengan peletakan source code di Github agar dapat digunakan oleh khalayak ramai, developer, perusahaan, community, dan lain-lain
 
 Fitur
